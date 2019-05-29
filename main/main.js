@@ -25,24 +25,29 @@ function overflowEight(distance){
    return twoAndEight(8) + (distance-8)*0.8*1.5 
 }
 
+function judgeDis(distance, parkTime) {
+    switch (true) {
+        case distance > 0 && distance <= 2:
+            result = 6 + parkPrice(parkTime);
+            break;
+        case distance > 2 && distance <= 8:
+            result = twoAndEight(distance) + parkPrice(parkTime);
+            break;
+        case distance > 8:
+            result = overflowEight(distance) + parkPrice(parkTime);
+            break;
+    }
+}
 
 
 module.exports = function main(inputs) {
     // write your code here...
     let {distance,parkTime} = inputs;
     // console.log(distance,parkTime)
-    switch (true) {
-        case distance>0 && distance<=2:
-                result = 6 + parkPrice(parkTime)
-            break;
-        case distance>2 && distance<=8:
-                result = twoAndEight(distance) + parkPrice(parkTime)
-            break;
-        case distance> 8:
-                result = overflowEight(distance) + parkPrice(parkTime)
-            break;
-    }
+    judgeDis(distance, parkTime);
     
 
     return Math.round(result);
 };
+
+
